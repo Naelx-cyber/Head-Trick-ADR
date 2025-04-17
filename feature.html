@@ -1,0 +1,824 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Halaman Feature INJECTOR Free Fire</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #000; /* Warna latar belakang */
+            margin: 0;
+            padding: 20px;
+            overflow: hidden; /* Mencegah scrollbar */
+        }
+
+        .container {
+            background-color: rgba(0, 255, 255, 0.8); /* Warna aqua dengan sedikit transparansi */
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            max-width: 600px;
+            margin: auto;
+            position: relative; /* Agar titik-titik bisa diposisikan relatif terhadap container */
+            z-index: 1; /* Agar container berada di atas titik-titik */
+            color: #333; /* Warna teks default dalam container */
+        }
+
+        h1 {
+            text-align: center;
+            color: #000; /* Warna teks judul */
+        }
+        h5 {
+             color: #555; /* Warna teks subjudul */
+             text-align: center;
+        }
+
+        nav ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        nav li {
+            margin: 15px 0;
+            display: flex;
+            align-items: center;
+            flex-wrap: wrap; /* Agar kode bisa wrap jika terlalu panjang */
+        }
+
+        input[type="checkbox"] {
+            margin-left: 10px;
+        }
+
+        input[type="range"] {
+            margin-left: 10px;
+            flex-grow: 1; /* Biarkan slider mengisi ruang */
+            min-width: 150px; /* Lebar minimum slider */
+        }
+
+        .status {
+            margin-left: 10px;
+            font-weight: bold;
+            color: green;
+        }
+
+        .star-message {
+            margin-top: 20px;
+            font-weight: bold;
+            color: blue;
+            cursor: pointer;
+            text-align: center;
+        }
+
+        .active-status {
+            margin-left: 10px;
+            font-weight: bold;
+            color: green;
+        }
+
+        /* Style untuk kode yang disisipkan (disembunyikan by default) */
+        .code-snippet {
+            display: none; /* Sembunyikan kode secara default */
+            width: 100%;
+            background-color: #f0f0f0;
+            border: 1px solid #ccc;
+            padding: 10px;
+            margin-top: 5px;
+            font-family: monospace;
+            white-space: pre-wrap; /* Agar teks kode bisa wrap */
+            word-wrap: break-word; /* Pecah kata jika terlalu panjang */
+            max-height: 150px; /* Batasi tinggi */
+            overflow-y: auto; /* Tambahkan scroll jika perlu */
+            font-size: 0.8em;
+            color: #333;
+        }
+
+        /* Gaya untuk titik-titik */
+        .dot {
+            position: absolute;
+            border-radius: 50%;
+            opacity: 0.7;
+            animation: float 5s infinite;
+            z-index: 0; /* Pastikan titik di belakang container */
+        }
+
+        @keyframes float {
+            0% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-20px);
+            }
+            100% {
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>INJECTOR ADR Free Fire</h1>
+        <h5>File Ini Hanya Menambahkan Penepatan Saat Menembak Dan Harus Drag Agar Mendapatkan HeadShoot Yang Akurat</h5>
+        <nav>
+            <ul>
+                <li>
+                    Aim FOV
+                    <input type="checkbox" id="aim-fov" onchange="updateStatus('aim-fov', 'status-aim-fov')">
+                    <span class="status" id="status-aim-fov"></span>
+                    <!-- Kode Aim FOV disisipkan di sini -->
+                    <pre class="code-snippet" id="code-aim-fov"><code>from builtins import *;DDDOODDoODODOOOoDOD,jiliijiiiljiijijllj,XWWXWXWXXWXXWXXWXXX,OoO0000O0OOoo0O0OoO0o0oO,wxwxxwwxwwwxxwxwxwww</code></pre>
+                </li>
+                <li>
+                    Aim Bot 68%
+                    <input type="checkbox" id="aim-bot" onchange="updateStatus('aim-bot', 'status-aim-bot')">
+                    <span class="status" id="status-aim-bot"></span>
+                    <!-- Kode Aim Bot disisipkan di sini -->
+                    <pre class="code-snippet" id="code-aim-bot"><code>using System;
+using System.Threading;
+using AnimeSoftware.Hack.Models;
+using AnimeSoftware.Utils;
+
+namespace AnimeSoftware.Hack.Features
+{
+    public static class Aimbot
+    {
+        public static void Run()
+        {
+            while (true)
+            {
+                Thread.Sleep(1);
+
+                if (!Properties.Settings.Default.aimbot || !Engine.InGame)
+                    continue;
+
+                if (!Input.KeyDown(0x01))
+                    continue;
+
+                var lp = new LocalPlayer();
+
+                if (lp.Ptr == IntPtr.Zero || lp.Health &lt;= 0 || lp.Dormant)
+                    continue;
+
+                var weapon = lp.ActiveWeapon;
+
+                if (weapon.IsBomb() || weapon.IsGrenade() || weapon.IsKnife())
+                    continue;
+
+                // if (!weapon.CanFire)
+                //     continue;
+
+                var target = GetBestTarget(out var aim, Properties.Settings.Default.friendlyfire);
+                var punch = lp.PunchAngle * 2;
+                var va = lp.ViewAngle;
+                var untouched = va + punch;
+                untouched.NormalizeAngle();
+
+                if (target.Ptr == lp.Ptr || CalcFov(untouched, aim) &gt; Properties.Settings.Default.fov)
+                    continue;
+
+                if (weapon.IsPistol() &amp;&amp; lp.ShotsFired &gt; 0)
+                    continue;
+
+                if (!weapon.IsPistol() &amp;&amp; !weapon.IsShotgun() &amp; !weapon.IsSniper())
+                    aim = aim - punch;
+
+                // aim.NormalizeAngle();
+
+                aim = LinearSmooth(va, aim, Properties.Settings.Default.smooth);
+
+                aim.NormalizeAngle();
+                aim.Clamp();
+
+                lp.ViewAngle = aim;
+            }
+        }
+
+        private static int[] _boneIds = new[]
+        {
+            8, // head
+            7, // neck
+            11, // left shoulder
+            41, // right shoulder
+            6, // body
+            78, // left leg
+            71, // right leg
+        };
+
+        public static Player GetBestTarget(out Vector dst, bool ff = false)
+        {
+            var lp = new LocalPlayer();
+            var result = (Player) lp;
+            var team = lp.Team;
+            var viewPos = lp.EyePosition;
+            float bestFov = float.MaxValue;
+
+            var angle = lp.ViewAngle;
+            dst = angle;
+            var calcAngle = lp.ViewAngle + lp.PunchAngle * 2f;
+            calcAngle.NormalizeAngle();
+
+            foreach (var e in EntityList.GetPlayers())
+            {
+                if (e.Dormant || e.Health &lt;= 0)
+                    continue;
+
+                if (!ff &amp;&amp; e.Team == team)
+                    continue;
+
+                for (var i = 0; i &lt; _boneIds.Length; i++)
+                {
+                    var bonePos = e.GetBonePosition(_boneIds[i]);
+
+                    var aim = CalcAngles(viewPos, bonePos); // (bonePos - viewPos).ToAngle();
+                    aim.NormalizeAngle();
+
+                    var fov = CalcFov(calcAngle, aim);
+
+                    if (fov &lt; bestFov)
+                    {
+                        dst = aim;
+                        result = e;
+                        bestFov = fov;
+                    }
+                }
+            }
+
+            return result;
+        }
+
+        public static Vector CalcAngles(Vector src, Vector dst)
+        {
+            Vector delta = dst - src;
+            Vector angles = new Vector()
+            {
+                X = ExtraMath.RadianToDegrees((float) Math.Atan2(-delta.Z, Math.Sqrt(delta.X * delta.X + delta.Y * delta.Y))),
+                Y = ExtraMath.RadianToDegrees((float) Math.Atan2(delta.Y, delta.X)),
+                Z = 0
+            };
+            return angles;
+        }
+
+        public static float CalcFov(Vector src, Vector dst)
+        {
+            var delta = dst - src;
+            delta.NormalizeAngle();
+            return delta.Length2D;
+        }
+
+        public static Vector LinearSmooth(Vector src, Vector dst, float speed)
+        {
+            if (speed == 0)
+                return dst;
+
+            var delta = dst - src;
+
+            if (delta.Length == 0f)
+                return src;
+
+            delta.NormalizeAngle();
+            delta.Normalize();
+
+            var result = src + delta * speed;
+
+            delta = dst - src;
+            delta.NormalizeAngle();
+
+            if (delta.Length - (result - src).Length &lt; 0)
+                return dst;
+
+            return result;
+        }
+    }
+}</code></pre>
+                </li>
+                 <li>
+                    Aim Accuracy croos
+                    <input type="checkbox" id="aim-accuracy" onchange="updateStatus('aim-accuracy', 'status-aim-accuracy')">
+                    <span class="status" id="status-aim-accuracy"></span>
+                    <!-- Kode Aim Accuracy disisipkan di sini (ini terlihat seperti data rusak/binary) -->
+                    <pre class="code-snippet" id="code-aim-accuracy"><code>��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��  ��</code></pre>
+                </li>
+                <li>
+                    Aim Lock Tric
+                    <input type="checkbox" id="aim-lock" onchange="updateStatus('aim-lock', 'status-aim-lock')">
+                    <span class="status" id="status-aim-lock"></span>
+                     <!-- Kode Aim Lock disisipkan di sini -->
+                     <pre class="code-snippet" id="code-aim-lock"><code>local plrs = game:GetService("Players")
+local TeamBased = true ; local teambasedswitch = ""
+local presskeytoaim = true; local aimkey = "e"
+local raycast = false
+
+local espupdatetime = 5; autoesp = false
+
+
+
+local lockaim = true; local lockangle = 5
+
+
+
+--function findwat(folder, what)
+--	for i, smth in pairs(folder:GetChildren()) do
+--		if string.find(string.lower(tostring(smth)), string.lower(what)) then
+--			return smth
+--		end
+--	end
+--end
+--
+--local plrs = findwat(game, "Players")
+
+
+
+
+local Gui = Instance.new("ScreenGui")
+local Move = Instance.new("Frame")
+local Main = Instance.new("Frame")
+local EspStatus = Instance.new("TextLabel")
+local st1 = Instance.new("TextLabel")
+local st1_2 = Instance.new("TextLabel")
+local st1_3 = Instance.new("TextLabel")
+local Name = Instance.new("TextLabel")
+--Properties:
+Gui.Name = "Gui"
+Gui.Parent = game.CoreGui
+
+Move.Name = "Move"
+Move.Parent = Gui
+Move.BackgroundColor3 = Color3.new(0.0431373, 1, 0.0745098)
+Move.BackgroundTransparency = 0.40000000596046
+Move.BorderSizePixel = 0
+Move.Position = UDim2.new(0.005, 0,0.018, 0)
+Move.Size = UDim2.new(0.28141585, 0, 0.0320388414, 0)
+Move.Visible = false
+
+Main.Name = "Main"
+Main.Parent = Move
+Main.BackgroundColor3 = Color3.new(0.176471, 0.176471, 0.176471)
+Main.BackgroundTransparency = 0.69999998807907
+Main.Position = UDim2.new(0, 0, 0.995670795, 0)
+Main.Size = UDim2.new(1.0000006, 0, 9.79697132, 0)
+Main.Visible = false
+
+EspStatus.Name = "EspStatus"
+EspStatus.Parent = Main
+EspStatus.BackgroundColor3 = Color3.new(1, 1, 1)
+EspStatus.BackgroundTransparency = 1
+EspStatus.Size = UDim2.new(0.272955924, 0, 0.161862016, 0)
+EspStatus.Font = Enum.Font.ArialBold
+EspStatus.Text = ""
+EspStatus.TextScaled = true
+EspStatus.TextSize = 0
+EspStatus.TextWrapped = true
+
+st1.Name = "st1"
+st1.Parent = Main
+st1.BackgroundColor3 = Color3.new(1, 1, 1)
+st1.BackgroundTransparency = 1
+st1.Position = UDim2.new(0.271787882, 0, 0, 0)
+st1.Size = UDim2.new(0.728211343, 0, 0.161862016, 0)
+st1.Font = Enum.Font.ArialBold
+st1.Text = "Press "..aimkey.." to lock on a person inside ur view"
+st1.TextScaled = true
+st1.TextSize = 0
+st1.TextWrapped = true
+
+st1_2.Name = "st1"
+st1_2.Parent = Main
+st1_2.BackgroundColor3 = Color3.new(1, 1, 1)
+st1_2.BackgroundTransparency = 1
+st1_2.Position = UDim2.new(0, 0, 0.375590861, 0)
+st1_2.Size = UDim2.new(0.999999881, 0, 0.161862016, 0)
+st1_2.Font = Enum.Font.ArialBold
+st1_2.Text = "Press L to enable esp loop"
+st1_2.TextScaled = true
+st1_2.TextSize = 0
+st1_2.TextWrapped = true
+
+st1_3.Name = "st1"
+st1_3.Parent = Main
+st1_3.BackgroundColor3 = Color3.new(1, 1, 1)
+st1_3.BackgroundTransparency = 1
+st1_3.Position = UDim2.new(0, 0, 0.18558608, 0)
+st1_3.Size = UDim2.new(0.999999881, 0, 0.161862016, 0)
+st1_3.Font = Enum.Font.ArialBold
+st1_3.Text = "Press O to change team based mode"
+st1_3.TextScaled = true
+st1_3.TextSize = 0
+st1_3.TextWrapped = true
+local teambasedstatus = st1_3:Clone()
+teambasedstatus.Parent = st1_3
+teambasedstatus.TextScaled = true
+teambasedstatus.Position = UDim2.new(0, 0,0.694, 0)
+teambasedstatus.Text = tostring(TeamBased)
+
+Name.Name = "Name"
+Name.Parent = Move
+Name.BackgroundColor3 = Color3.new(1, 1, 1)
+Name.BackgroundTransparency = 1
+Name.Size = UDim2.new(0.838, 0, 0.980000019, 0)
+Name.Font = Enum.Font.Arial
+Name.Text = "FPS gui v1.0"
+Name.TextColor3 = Color3.new(0, 0, 0)
+Name.TextScaled = true
+Name.TextSize = 14
+Name.TextWrapped = true
+Name.TextXAlignment = Enum.TextXAlignment.Left
+-- Scripts:
+
+
+local plrsforaim = {}
+
+local lplr = game:GetService("Players").LocalPlayer
+Move.Draggable = true
+Gui.ResetOnSpawn = false
+Gui.Name = "Chat"
+Gui.DisplayOrder = 999
+
+Gui.Parent = plrs.LocalPlayer.PlayerGui
+
+
+f = {}
+local espforlder
+
+f.addesp = function()
+	--print("ESP ran")
+	if espforlder then
+	else
+		espforlder = Instance.new("Folder")
+		espforlder.Parent = game.CoreGui
+	end
+	for i, v in pairs(espforlder:GetChildren()) do
+		v:Destroy()
+	end
+	for _, plr in pairs(plrs:GetChildren()) do
+		if plr.Character and plr.Character.Humanoid.Health &gt; 0 and plr.Name ~= lplr.Name then
+			if TeamBased == true then
+				if plr.Team.Name ~= plrs.LocalPlayer.Team.Name  then
+					local e = espforlder:FindFirstChild(plr.Name)
+					if not e then
+						--print("Added esp for team based")
+						local bill = Instance.new("BillboardGui", espforlder)
+						bill.Name = plr.Name
+						bill.AlwaysOnTop = true
+						bill.Size = UDim2.new(1,0,1,0)
+						bill.Adornee = plr.Character.Head
+						local Frame = Instance.new('Frame',bill)
+						Frame.Active = true
+						Frame.BackgroundColor3 = Color3.new(0.0901961, 0.988235, 1)
+						Frame.BackgroundTransparency = 1
+						Frame.BorderSizePixel = 0
+						Frame.AnchorPoint = Vector2.new(.5, .5)
+						Frame.Position = UDim2.new (0.5,0,0.5,0)
+						Frame.Size = UDim2.new (1,0,1,0)
+						Frame.Rotation = 0
+						plr.Character.Humanoid.Died:Connect(function()
+							bill:Destroy()
+						end)
+					end
+				end
+			else
+				local e = espforlder:FindFirstChild(plr.Name)
+				if not e then
+					--print("Added esp")
+					local bill = Instance.new("BillboardGui", espforlder)
+					bill.Name = plr.Name
+					bill.AlwaysOnTop = true
+					bill.Size = UDim2.new(1,0,1,0)
+					bill.Adornee = plr.Character.Head
+					local Frame = Instance.new('Frame',bill)
+					Frame.Active = true
+					Frame.BackgroundColor3 = Color3.new(0.0901961, 0.988235, 1)
+					Frame.BackgroundTransparency = 1
+					Frame.BorderSizePixel = 0
+					Frame.AnchorPoint = Vector2.new(.5, .5)
+					Frame.Position = UDim2.new (0.5,0,0.5,0)
+					Frame.Size = UDim2.new (1,0,1,0)
+					Frame.Rotation = 0
+					plr.Character.Humanoid.Died:Connect(function()
+						bill:Destroy()
+					end)
+				end
+			end
+
+
+		end
+	end
+end
+local cam = game.Workspace.CurrentCamera
+
+local mouse = lplr:GetMouse()
+local switch = false
+local key = ""
+local aimatpart = nil
+mouse.KeyDown:Connect(function(a)
+	if a == "t" then
+		print("worked1")
+		f.addesp()
+	elseif a == "u" then
+		if raycast == true then
+			raycast = false
+		else
+			raycast = true
+		end
+	elseif a == "l" then
+		if autoesp == false then
+			autoesp = true
+		else
+			autoesp = false
+		end
+	end
+	if a == "" then
+		if mouse.Target then
+			mouse.Target:Destroy()
+		end
+	end
+	if a == key then
+		if switch == false then
+			switch = true
+		else
+			switch = false
+			if aimatpart ~= nil then
+				aimatpart = nil
+			end
+		end
+	elseif a == teambasedswitch then
+		if TeamBased == true then
+			TeamBased = false
+			teambasedstatus.Text = tostring(TeamBased)
+		else
+			TeamBased = true
+			teambasedstatus.Text = tostring(TeamBased)
+		end
+	elseif a == aimkey then
+		if not aimatpart then
+			local maxangle = math.rad(20)
+			for i, plr in pairs(plrs:GetChildren()) do
+				if plr.Name ~= lplr.Name and plr.Character and plr.Character.Head and plr.Character.Humanoid and plr.Character.Humanoid.Health &gt; 1 then
+					if TeamBased == true then
+						if plr.Team.Name ~= lplr.Team.Name then
+							local an = checkfov(plr.Character.Head)
+							if an &lt; maxangle then
+								maxangle = an
+								aimatpart = plr.Character.Head
+							end
+						end
+					else
+						local an = checkfov(plr.Character.Head)
+						if an &lt; maxangle then
+							maxangle = an
+							aimatpart = plr.Character.Head
+						end
+						print(plr)
+					end
+					plr.Character.Humanoid.Died:Connect(function()
+						if aimatpart.Parent == plr.Character or aimatpart == nil then
+							aimatpart = nil
+						end
+					end)
+				end
+			end
+		else
+			aimatpart = nil
+		end
+	end
+end)
+
+function getfovxyz (p0, p1, deg)
+	local x1, y1, z1 = p0:ToOrientation()
+	local cf = CFrame.new(p0.p, p1.p)
+	local x2, y2, z2 = cf:ToOrientation()
+	--local d = math.deg
+	if deg then
+		--return Vector3.new(d(x1-x2), d(y1-y2), d(z1-z2))
+	else
+		return Vector3.new((x1-x2), (y1-y2), (z1-z2))
+	end
+end
+
+function getaimbotplrs()
+	plrsforaim = {}
+	for i, plr in pairs(plrs:GetChildren()) do
+		if plr.Character and plr.Character.Humanoid and plr.Character.Humanoid.Health &gt; 0 and plr.Name ~= lplr.Name and plr.Character.Head then
+
+			if TeamBased == true then
+				if plr.Team.Name ~= lplr.Team.Name then
+					local cf = CFrame.new(game.Workspace.CurrentCamera.CFrame.p, plr.Character.Head.CFrame.p)
+					local r = Ray.new(cf, cf.LookVector * 10000)
+					local ign = {}
+					for i, v in pairs(plrs.LocalPlayer.Character:GetChildren()) do
+						if v:IsA("BasePart") then
+							table.insert(ign , v)
+						end
+					end
+					local obj = game.Workspace:FindPartOnRayWithIgnoreList(r, ign)
+					if obj.Parent == plr.Character and obj.Parent ~= lplr.Character then
+						table.insert(plrsforaim, obj)
+					end
+				end
+			else
+				local cf = CFrame.new(game.Workspace.CurrentCamera.CFrame.p, plr.Character.Head.CFrame.p)
+				local r = Ray.new(cf, cf.LookVector * 10000)
+				local ign = {}
+				for i, v in pairs(plrs.LocalPlayer.Character:GetChildren()) do
+					if v:IsA("BasePart") then
+						table.insert(ign , v)
+					end
+				end
+				local obj = game.Workspace:FindPartOnRayWithIgnoreList(r, ign)
+				if obj.Parent == plr.Character and obj.Parent ~= lplr.Character then
+					table.insert(plrsforaim, obj)
+				end
+			end
+
+
+		end
+	end
+end
+
+function aimat(part)
+	cam.CFrame = CFrame.new(cam.CFrame.p, part.CFrame.p)
+end
+function checkfov (part)
+	local fov = getfovxyz(game.Workspace.CurrentCamera.CFrame, part.CFrame)
+	local angle = math.abs(fov.X) + math.abs(fov.Y)
+	return angle
+end
+
+game:GetService("RunService").RenderStepped:Connect(function()
+	if aimatpart then
+		aimat(aimatpart)
+		if aimatpart.Parent == plrs.LocalPlayer.Character then
+			aimatpart = nil
+		end
+	end
+
+
+	--	if switch == true then
+	--		local maxangle = 99999
+	--		
+	--		--print("Loop")
+	--		if true and raycast == false then
+	--			for i, plr in pairs(plrs:GetChildren()) do
+	--				if plr.Name ~= lplr.Name and plr.Character and plr.Character.Head and plr.Character.Humanoid and plr.Character.Humanoid.Health &gt; 1 then
+	--					if TeamBased then
+	--						if plr.Team.Name ~= lplr.Team.Name or plr.Team.TeamColor ~= lplr.Team.TeamColor then
+	--							local an = checkfov(plr.Character.Head)
+	--							if an &lt; maxangle then
+	--								maxangle = an
+	--								aimatpart = plr.Character.Head
+	--								if an &lt; lockangle then
+	--									break
+	--								end
+	--							end
+	--						end
+	--					else
+	--						local an = checkfov(plr.Character.Head)
+	--							if an &lt; maxangle then
+	--								maxangle = an
+	--								aimatpart = plr.Character.Head
+	--								if an &lt; lockangle then
+	--									break
+	--								end
+	--							end
+	--					end
+	--					
+	--					
+	--					
+	--					
+	--				end
+	--			end
+	--		elseif raycast == true then
+	--			
+	--		end
+
+	if raycast == true and switch == false and not aimatpart then
+		getaimbotplrs()
+		aimatpart = nil
+		local maxangle = 999
+		for i, v in ipairs(plrsforaim) do
+			if v.Parent ~= lplr.Character then
+				local an = checkfov(v)
+				if an &lt; maxangle and v ~= lplr.Character.Head then
+					maxangle = an
+					aimatpart = v
+					print(v:GetFullName())
+					v.Parent.Humanoid.Died:connect(function()
+						aimatpart = nil
+					end)
+				end
+			end
+		end
+
+	end
+end)
+delay(0, function()
+	while wait(espupdatetime) do
+		if autoesp == true then
+			pcall(function()
+				f.addesp()
+			end)
+		end
+	end
+end)
+warn("loaded")</code></pre>
+                </li>
+                <li>
+                    Sensitivity Versic
+                    <input type="range" min="0" max="100" value="50" id="sensitivity">
+                    <!-- Kode Sensitivity disisipkan di sini -->
+                    <pre class="code-snippet" id="code-sensitivity"><code>&lt;name space="Free Fire"&lt;/name&gt;
+&lt;name data="com.dts.freefireth&lt;/name&gt;
+&lt;config&gt;
+    &lt;aim&gt;
+        &lt;sensitivity&gt;100&lt;/sensitivity&gt;
+    &lt;/aim&gt;
+&lt;/config&gt;
+
+&lt;config&gt;
+    &lt;device&gt;
+        &lt;display&gt;
+            &lt;refreshRate value="120" unit="Hz"/&gt;
+        &lt;/display&gt;
+    &lt;/device&gt;
+&lt;/config&gt;
+
+/* Cleaning Trash On Device */
+&lt;Clear System Trash Device="true"&gt;&lt;/clear&gt;</code></pre>
+                </li>
+            </ul>
+        </nav>
+        <div class="star-message" id="star-message">Star to file Free Fire</div>
+        <span class="active-status" id="active-status"></span> <!-- Status umum bisa dihapus jika tidak dipakai -->
+    </div>
+
+    <script>
+        // Fungsi untuk mengupdate status checkbox
+        function updateStatus(checkboxId, statusId) {
+            const checkbox = document.getElementById(checkboxId);
+            const status = document.getElementById(statusId);
+            const codeSnippet = document.getElementById('code-' + checkboxId); // Dapatkan elemen kode
+
+            status.textContent = checkbox.checked ? 'Active' : ''; // Menampilkan 'Active' jika dicentang
+
+            // Contoh: Tampilkan kode jika checkbox dicentang (opsional)
+            // if (codeSnippet) {
+            //     codeSnippet.style.display = checkbox.checked ? 'block' : 'none';
+            // }
+
+            // PENTING: Kode aktual TIDAK dijalankan di sini.
+            // Jika Anda ingin melakukan sesuatu saat checkbox dicentang,
+            // Anda perlu menambahkan logika JavaScript lain di sini,
+            // TAPI Anda TIDAK BISA menjalankan kode Python, C#, Lua, atau XML secara langsung.
+            if (checkbox.checked) {
+                console.log(`Fitur ${checkboxId} diaktifkan (secara UI). Kode terkait (tidak dieksekusi):`, codeSnippet ? codeSnippet.textContent : 'Tidak ada kode');
+            } else {
+                console.log(`Fitur ${checkboxId} dinonaktifkan (secara UI).`);
+            }
+        }
+
+         // Fungsi untuk membuat titik-titik
+        function createDot() {
+            const dot = document.createElement('div');
+            dot.className = 'dot';
+            dot.style.width = Math.random() * 10 + 5 + 'px'; // Ukuran acak antara 5px dan 15px
+            dot.style.height = dot.style.width; // Membuatnya bulat
+            dot.style.backgroundColor = `hsl(${Math.random() * 360}, 100%, 50%)`; // Warna acak
+            dot.style.left = Math.random() * window.innerWidth + 'px'; // Posisi horizontal acak
+            dot.style.top = Math.random() * window.innerHeight + 'px'; // Posisi vertikal acak
+            dot.style.animationDuration = Math.random() * 3 + 2 + 's'; // Durasi animasi acak antara 2s dan 5s
+            dot.style.animationDelay = Math.random() * 5 + 's'; // Delay animasi acak
+            dot.style.opacity = Math.random() * 0.5 + 0.2; // Opasitas acak (lebih redup)
+            dot.style.boxShadow = `0 0 10px ${dot.style.backgroundColor}, 0 0 20px ${dot.style.backgroundColor}`; // Efek cahaya
+            document.body.insertBefore(dot, document.body.firstChild); // Masukkan di belakang container
+        }
+
+        // Membuat beberapa titik
+        for (let i = 0; i < 50; i++) {
+            createDot();
+        }
+
+        // Inisialisasi status saat halaman dimuat
+        document.addEventListener('DOMContentLoaded', () => {
+            updateStatus('aim-fov', 'status-aim-fov');
+            updateStatus('aim-bot', 'status-aim-bot');
+            updateStatus('aim-accuracy', 'status-aim-accuracy');
+            updateStatus('aim-lock', 'status-aim-lock');
+             // Tidak ada status untuk slider, tapi Anda bisa menambahkan label nilai jika mau
+            const sensitivitySlider = document.getElementById('sensitivity');
+            const sensitivityValueLabel = document.createElement('span'); // Contoh menambah label nilai
+            sensitivityValueLabel.id = 'sensitivity-value';
+            sensitivityValueLabel.textContent = ` (${sensitivitySlider.value})`;
+            sensitivitySlider.parentNode.appendChild(sensitivityValueLabel);
+            sensitivitySlider.oninput = function() {
+                 sensitivityValueLabel.textContent = ` (${this.value})`;
+                 console.log(`Sensitivity diubah menjadi: ${this.value}. Kode terkait (tidak dieksekusi):`, document.getElementById('code-sensitivity').textContent);
+            }
+            // Panggil console log awal untuk sensitivity
+             console.log(`Sensitivity awal: ${sensitivitySlider.value}. Kode terkait (tidak dieksekusi):`, document.getElementById('code-sensitivity').textContent);
+        });
+
+    </script>
+</body>
+
+</html>
